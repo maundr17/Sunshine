@@ -143,11 +143,15 @@ public class ForecastFragment extends Fragment {
                 final String UNITS_PARAM = "units";
                 final String DAYS_PARAM = "cnt";
 
+                // append my appid to fix api issue
+                final String appid = "46e11cd997e5e2c1fb205e0e0f626066";
+
                 Uri builtUri = Uri.parse(FORECAST_BASE_URL).buildUpon()
                         .appendQueryParameter(QUERY_PARAM, params[0])
                         .appendQueryParameter(FORMAT_PARAM, format)
                         .appendQueryParameter(UNITS_PARAM, units)
                         .appendQueryParameter(DAYS_PARAM, Integer.toString(numDays))
+                        .appendQueryParameter("APPID", appid)
                         .build();
 
                 URL url = new URL(builtUri.toString());
@@ -370,7 +374,7 @@ public class ForecastFragment extends Fragment {
 
         private String[] getJsonWind(String forecastJsonStr, int numDays) throws Exception {
             final String OWM_LIST = "list";
-            final String WINDJSON = "";
+            final String WINDJSON = "wind";
             String wind;
 
             JSONObject forecastJson = new JSONObject(forecastJsonStr);
@@ -383,7 +387,7 @@ public class ForecastFragment extends Fragment {
 
         private String[] getPressure(String forecastJsonStr, int numDays) throws Exception {
             final String OWM_LIST = "list";
-            final String PRESSUREJSON = "";
+            final String PRESSUREJSON = "pressure";
             String pressure;
 
             JSONObject forecastJson = new JSONObject(forecastJsonStr);
